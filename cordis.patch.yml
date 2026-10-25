@@ -1,0 +1,9 @@
+# dsh-note-forge bundle for DeepSeek Harness (dsh).
+# 装进 profile 后，noteforge_* 工具与 note-forge skill 随会话可用。
+# vaultPath 指向你的 Obsidian vault（不填则默认 ~/Desktop/physiologyshit），填绝对路径或 ~ 开头均可。
+- insert:
+    - id: note-forge
+      name: 'dsh-note-forge'
+      config:
+        # vaultPath: ~/Obsidian/我的笔记
+        vaultPath: ~/Desktop/physiologyshit

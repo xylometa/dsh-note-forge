@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>笔记工坊 · note-forge</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="dot"></span>
+    <h1>笔记工坊</h1>
+    <span class="tag">note-forge</span>
+  </div>
+  <div class="vault" id="vaultPath">…</div>
+  <button id="refresh" class="ghost">刷新</button>
+</header>
+
+<main>
+  <!-- 左：从 PDF 建一章 -->
+  <section class="pane left">
+    <h2>① 整份 PDF → 一篇章节笔记</h2>
+    <label>教材 PDF
+      <input id="pdf" list="pdfs" placeholder="~/Downloads/xxx.pdf" autocomplete="off">
+      <datalist id="pdfs"></datalist>
+    </label>
+    <div class="row">
+      <label>章号<input id="chapter" placeholder="7" inputmode="numeric"></label>
+      <label>章名<input id="title" placeholder="消化和吸收（可留空）"></label>
+    </div>
+    <div class="row">
+      <label>页码范围<input id="pages" placeholder="1-30（留空=全书）"></label>
+      <label>教材名<input id="source" placeholder="默认取 PDF 名"></label>
+    </div>
+    <div class="row">
+      <label>只收这几节进索引<input id="sections" placeholder="如 一,二（留空=全部）"></label>
+      <label>切图 dpi<input id="dpi" value="300" inputmode="numeric"></label>
+    </div>
+    <div class="row">
+      <label>页偏移<input id="pageOffset" placeholder="自动"></label>
+    </div>
+    <div class="actions">
+      <button id="dry" class="ghost">预演</button>
+      <button id="gen" class="primary">生成骨架</button>
+    </div>
+    <p class="hint">一次读完整份 PDF，生成<b>一篇</b>章节笔记：节只进「本章索引」，不再一节一个文件。只认<b>有图版</b> PDF；每节原文另存 <code>_原文/</code> 供逐条核对。</p>
+
+    <h2 class="mt">② 体检</h2>
+    <label>笔记目录<input id="reportDir" placeholder="选一本书的章，或填绝对路径"></label>
+    <div class="actions"><button id="report" class="ghost">跑体检</button></div>
+  </section>
+
+  <!-- 中：目录树 -->
+  <section class="pane middle">
+    <div class="pane-head">
+      <h2>③ 笔记</h2>
+      <span class="count" id="count"></span>
+    </div>
+    <div id="tree" class="tree"></div>
+  </section>
+
+  <!-- 右：结果 / 预览 -->
+  <section class="pane right">
+    <div class="pane-head">
+      <h2 id="rightTitle">日志</h2>
+      <div class="tabs">
+        <button class="tab active" data-tab="log">日志</button>
+        <button class="tab" data-tab="map">导图</button>
+        <button id="mkmap" class="mini">生成导图</button>
+      </div>
+    </div>
+    <pre id="log" class="log"></pre>
+    <div id="framebox" class="framebox"><iframe id="frame" title="导图预览"></iframe></div>
+  </section>
+</main>
+
+<div id="toast" class="toast"></div>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{
+  "name": "dsh-note-forge",
+  "version": "0.2.0",
+  "private": false,
+  "description": "DeepSeek Harness (dsh) 插件：把有图版教材 PDF 一次性变成 Obsidian 考点笔记——题注 300dpi 切图、整份 PDF 出一篇章笔记、节只作索引、自带本地 Web 前端与离线思维导图。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./skill": "./SKILL.md",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "cordis.patch.yml",
+    "docs",
+    "forge.py",
+    "lib/index.js",
+    "lib/pipeline.js",
+    "ui/app.js",
+    "ui/index.html",
+    "ui/server.mjs",
+    "ui/style.css"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "dsh": "^0.2.0-rc.1 || ^0.2.1-rc.1",
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "license": "MIT",
+  "author": "xylometa",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "obsidian",
+    "pdf",
+    "pymupdf",
+    "mindmap",
+    "study-notes"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xylometa/dsh-note-forge.git"
+  },
+  "homepage": "https://github.com/xylometa/dsh-note-forge#readme",
+  "bugs": {
+    "url": "https://github.com/xylometa/dsh-note-forge/issues"
+  },
+  "scripts": {
+    "ui": "node ui/server.mjs",
+    "selftest": "node lib/pipeline.js selftest"
+  }
+}
