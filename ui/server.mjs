@@ -2,7 +2,7 @@
 /**
  * note-forge 前端：本地零依赖 Web UI。
  *   node ui/server.mjs [--port 7788]
- * 只监听 127.0.0.1，数据全部是本机的 vault 与 PDF。
+ * 默认只监听 127.0.0.1（数据全在本机 vault 与 PDF）；部署到服务器时用 --host 0.0.0.0 显式放开，并自行加访问控制。
  */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -19,6 +19,10 @@ const HOME = process.env.HOME ?? os.homedir();
 const argPort = (() => {
   const i = process.argv.indexOf('--port');
   return i > 0 ? Number(process.argv[i + 1]) : Number(process.env.NOTEFORGE_PORT ?? 7788);
+})();
+const argHost = (() => {
+  const i = process.argv.indexOf('--host');
+  return i > 0 ? process.argv[i + 1] : (process.env.NOTEFORGE_HOST ?? '127.0.0.1');
 })();
 
 const VAULT = process.env.NOTEFORGE_VAULT
@@ -241,8 +245,9 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-server.listen(argPort, '127.0.0.1', () => {
+server.listen(argPort, argHost, () => {
   const addr = server.address();
-  console.log(`note-forge UI → http://127.0.0.1:${addr.port}`);
+  const shown = argHost === '0.0.0.0' ? '0.0.0.0' : argHost;
+  console.log(`note-forge UI → http://${shown}:${addr.port}`);
   console.log(`vault: ${VAULT}`);
 });

@@ -101,3 +101,24 @@ node lib/pipeline.js selftest
 ## License
 
 MIT
+
+## 部署到服务器
+
+插件本体是 Node 进程 + 一个 Python 切图脚本，服务器上需要 Node 22.19+/24+ 与 `python3 -m pip install pymupdf`。
+
+```bash
+# 服务器上
+git clone https://github.com/<账号>/dsh-note-forge.git
+cd dsh-note-forge
+python3 -m venv .venv-pdf && ./.venv-pdf/bin/pip install pymupdf
+node ui/server.mjs --host 0.0.0.0 --port 7788     # 默认只监听 127.0.0.1
+dsh plugin --profile tauri add link:$(pwd)         # 需要在服务器上装 dsh 才有 noteforge_* 工具
+```
+
+`--host 0.0.0.0` 会把前端暴露到网络，前端没有鉴权，请配合防火墙 / 反向代理 Basic Auth / SSH 隧道使用：
+
+```bash
+ssh -N -L 7788:127.0.0.1:7788 用户名@服务器    # 更安全的做法：服务器仍只听 127.0.0.1
+```
+
+`vaultPath` 要指向服务器上的 Obsidian vault 路径（`cordis.patch.yml` 或环境变量 `NOTEFORGE_VAULT`）。
