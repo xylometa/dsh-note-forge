@@ -98,6 +98,10 @@ node lib/pipeline.js selftest
 - **跨章 PDF**：一次读整份 PDF，但目前用 `chapter` 参数指定章号；整本书自动拆多章仍是 TODO。
 - **改完插件代码要重启 dsh**：运行中的进程用旧模块。
 
+## 路线图
+
+升级方向与作者偏好清单见 [ROADMAP.md](ROADMAP.md)：前端设计、生成偏好可配、书籍格式适配、整本书一次拆多章。
+
 ## License
 
 MIT
