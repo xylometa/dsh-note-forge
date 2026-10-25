@@ -100,7 +100,7 @@ node lib/pipeline.js selftest
 
 ## 路线图
 
-升级方向与作者偏好清单见 [ROADMAP.md](ROADMAP.md)：前端设计、生成偏好可配、书籍格式适配、整本书一次拆多章。
+升级方向与作者偏好清单见 [ROADMAP.md](ROADMAP.md)：前端设计、生成偏好可配、书籍格式适配、整本书一次拆多章、整本书学习顺序规划。
 
 ## License
 
